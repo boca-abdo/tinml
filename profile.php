@@ -327,6 +327,8 @@
 												</div>
 												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
 												<?php
+													$comps_data = file_get_contents("json/comps.txt");
+													$comps_arr = json_decode($comps_data, true);
 													foreach ($classroom as $class_name) {
 														$i = 0;
 														while ($i < 4) {
@@ -338,9 +340,19 @@
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
 				                      </select>
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
 				                      </select>
 			                      </div>
 													</fieldset>
