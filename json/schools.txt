@@ -1,0 +1,234 @@
+{
+  "01" : {
+    "aca_ar" : "طنجة-تطوان-الحسيمة",
+    "aca_fr" : "tanger tétouan al hoceima",
+    "aca_az" : "ⵟⴰⵏⵊⴰ ⵜⵉⵟⵡⴰⵏ ⵍⵃⵓⵙⵉⵎⴰ",
+    "dels": {
+      "01" : {
+        "del_ar" : "طنجة-أصيلة",
+        "del_fr" : "tanger-assilah"
+      },
+      "02" : {
+        "del_ar" : "الفحص-أنجرة",
+        "del_fr" : "fahs-anjra"
+      },
+      "03" : {
+        "del_ar" : "تطوان",
+        "del_fr" : "tétouan"
+      },
+      "04" : {
+        "del_ar" : "الحسيمة",
+        "del_fr" : "al hoceima"
+      },
+      "05" : {
+        "del_ar" : "المضيق-الفنيدق",
+        "del_fr" : "mdiq-fnideq"
+      },
+      "06" : {
+        "del_ar" : "العرائش",
+        "del_fr" : "larache"
+      },
+      "07" : {
+        "del_ar" : "شفشاون",
+        "del_fr" : "chefchaouen"
+      },
+      "08" : {
+        "del_ar" : "وزان",
+        "del_fr" : "ouezzane"
+      }
+    }
+  },
+  "02" : {
+    "aca_ar" : "الشرق",
+    "aca_fr" : "oriental",
+    "dels": {
+      "09" : {
+        "del_ar" : "وجدة-أنكاد",
+        "del_fr" : "oujda-angad"
+      },
+      "10" : {
+        "del_ar" : "الناضور",
+        "del_fr" : "nador"
+      },
+      "11" : {
+        "del_ar" : "الدريوش",
+        "del_fr" : "driouch"
+      },
+      "12" : {
+        "del_ar" : "بركان",
+        "del_fr" : "berkane"
+      },
+      "13" : {
+        "del_ar" : "تاوريرت",
+        "del_fr" : "taourirt"
+      },
+      "14" : {
+        "del_ar" : "جرادة",
+        "del_fr" : "jerada"
+      },
+      "15" : {
+        "del_ar" : "كرسيف",
+        "del_fr" : "guercif"
+      },
+      "16" : {
+        "del_ar" : "فكيك",
+        "del_fr" : "figuig"
+      }
+    }
+  },
+  "03" : {
+    "aca_ar" : "فاس-مكناس",
+    "aca_fr" : "fès meknes",
+    "dels": {
+      "17" : {
+        "del_ar" : "فاس",
+        "del_fr" : "fès"
+      },
+      "18" : {
+        "del_ar" : "مكناس",
+        "del_fr" : "meknes"
+      },
+      "19" : {
+        "del_ar" : "بولمان",
+        "del_fr" : "boulemane"
+      },
+      "20" : {
+        "del_ar" : "صفرو",
+        "del_fr" : "sefrou"
+      },
+      "21" : {
+        "del_ar" : "تاونات",
+        "del_fr" : "taounate"
+      },
+      "22" : {
+        "del_ar" : "تازة",
+        "del_fr" : "taza"
+      },
+      "23" : {
+        "del_ar" : "الحاجب",
+        "del_fr" : "el hajeb"
+      },
+      "24" : {
+        "del_ar" : "افران",
+        "del_fr" : "ifrane"
+      },
+      "25" : {
+        "del_ar" : "مولاي يعقوب",
+        "del_fr" : "moulay yaâcoub"
+      }
+    }
+  },
+  "04" : {
+    "aca_ar" : "الرباط سلا القنيطرة",
+    "aca_fr" : "rabat salé kénitra",
+    "dels": {
+      "26" : {
+        "del_ar" : "الرباط",
+        "del_fr" : "rabat"
+      },
+      "27" : {
+        "del_ar" : "سلا",
+        "del_fr" : "salé"
+      },
+      "28" : {
+        "del_ar" : "القنيطرة",
+        "del_fr" : "kénitra"
+      },
+      "29" : {
+        "del_ar" : "الخميسات",
+        "del_fr" : "khémisset"
+      },
+      "30" : {
+        "del_ar" : "سيدي قاسم",
+        "del_fr" : "sidi kacem"
+      },
+      "31" : {
+        "del_ar" : "سيدي سليمان",
+        "del_fr" : "sidi slimane"
+      },
+      "32" : {
+        "del_ar" : "الصخيرات تمارة",
+        "del_fr" : "skhirat témara"
+      }
+    }
+  },
+  "05" : {
+    "aca_ar" : "بني ملال خنيفرة",
+    "aca_fr" : "béni mellal khénifra",
+    "dels": {
+      "33" : {
+        "del_ar" : "بني ملال",
+        "del_fr" : "beni mellal"
+      },
+      "34" : {
+        "del_ar" : "أزيلال",
+        "del_fr" : "azilal"
+      },
+      "35" : {
+        "del_ar" : "الفقيه بن صالح",
+        "del_fr" : "fquih ben saleh"
+      },
+      "36" : {
+        "del_ar" : "خنيفرة",
+        "del_fr" : "khénifra"
+      },
+      "37" : {
+        "del_ar" : "خريبكة",
+        "del_fr" : "khouribga"
+      }
+    }
+  },
+  "06" : {
+    "aca_ar" : "الدار البيضاء سطات",
+    "aca_fr" : "casablanca settat",
+    "dels": {
+      "38" : {
+        "del_ar" : "بني ملال",
+        "del_fr" : "beni mellal"
+      },
+      "39" : {
+        "del_ar" : "أزيلال",
+        "del_fr" : "azilal"
+      },
+      "40" : {
+        "del_ar" : "الفقيه بن صالح",
+        "del_fr" : "fquih ben saleh"
+      },
+      "41" : {
+        "del_ar" : "خنيفرة",
+        "del_fr" : "khénifra"
+      },
+      "42" : {
+        "del_ar" : "خريبكة",
+        "del_fr" : "khouribga"
+      },
+      "43" : {
+        "del_ar" : "أزيلال",
+        "del_fr" : "azilal"
+      },
+      "44" : {
+        "del_ar" : "الفقيه بن صالح",
+        "del_fr" : "fquih ben saleh"
+      },
+      "45" : {
+        "del_ar" : "خنيفرة",
+        "del_fr" : "khénifra"
+      },
+      "46" : {
+        "del_ar" : "خريبكة",
+        "del_fr" : "khouribga"
+      }
+    }
+  },
+  "02" : {
+    "aca_ar" : "سوس ماسة",
+    "aca_fr" : "Sous massa",
+    "dels": {
+      "01" : {"del_ar" : "اكادير اداوتنان","del_fr" : "agadir idaoutanane"},
+      "02" : {"del_ar" : "انزكان ايت ملول","del_fr" : "inzgane ait mloul"},
+      "03" : {"del_ar" : "تزنيت","del_fr" : "tiznit"},
+      "04" : {"del_ar" : "تارودانت","del_fr" : "taroudant"},
+      "05" : {"del_ar" : "طاطا","del_fr" : "tata"}
+    }
+  }
+}

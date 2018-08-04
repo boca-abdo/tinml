@@ -1,0 +1,20 @@
+{
+  "5" : {
+    "ara" : {
+      "قراءة" : ["","lect1","lect2","lect3","lect4","lect5","lect6","lect7","lect8","lect9","lect10","lect11","lect12","lect13","lect14","lect15","lect16","lect17","lect18","lect19","lect20","lect21","lect22","lect23","lect24","lect25","lect26","lect27","lect28","lect29","lect30","lect31","lect32","lect33","lect34"],
+      "lec" : ["","lect1","lect2","lect3","lect4","lect5","lect6","lect7","lect8","lect9","lect10","lect11","lect12","lect13","lect14","lect15","lect16","lect17","lect18","lect19","lect20","lect21","lect22","lect23","lect24","lect25","lect26","lect27","lect28","lect29","lect30","lect31","lect32","lect33","lect34"],
+      "gra" : ["","gram1","gram2","gram3","gram4","gram5","gram6","gram7","gram8","gram9","gram10","gram11","gram12","gram13","gram14","gram15","gram16","gram17","gram18","gram19","gram20","gram21","gram22","gram23","gram24","gram25","gram26","gram27","gram28","gram29","gram30","gram31","gram32","gram33","gram34"],
+      "con" : ["","conj1","conj2","conj3","conj4","conj5","conj6","conj7","conj8","conj9","conj10","conj11","conj12","conj13","conj14","conj15","conj16","conj17","conj18","conj19","conj20","conj21","conj22","conj23","conj24","conj25","conj26","conj27","conj28","conj29","conj30","conj31","conj32","conj33","conj34"],
+      "ort" : ["","orth1","orth2","orth3","orth4","orth5","orth6","orth7","orth8","orth9","orth10","orth11","orth12","orth13","orth14","orth15","orth16","orth17","orth18","orth19","orth20","orth21","orth22","orth23","orth24","orth25","orth26","orth27","orth28","orth29","orth30","orth31","orth32","orth33","orth34"],
+      "lex" : ["","lex1","lex2","lex3","lex4","lex5","lex6","lex7","lex8","lex9","lex10","lex11","lex12","lex13","lex14","lex15","lex16","lex17","lex18","lex19","lex20","lex21","lex22","lex23","lex24","lex25","lex26","lex27","lex28","lex29","lex30","lex31","lex32","lex33","lex34"]
+    },
+    "fra" : {
+      "com" : ["","comm1","comm2","comm3","comm4","comm5","comm6","comm7","comm8","comm9","comm10","comm11","comm12","comm13","comm14","comm15","comm16","comm17","comm18","comm19","comm20","comm21","comm22","comm23","comm24","comm25","comm26","comm27","comm28","comm29","comm30","comm31","comm32","comm33","comm34"],
+      "lec" : ["","lect1","lect2","lect3","lect4","lect5","lect6","lect7","lect8","lect9","lect10","lect11","lect12","lect13","lect14","lect15","lect16","lect17","lect18","lect19","lect20","lect21","lect22","lect23","lect24","lect25","lect26","lect27","lect28","lect29","lect30","lect31","lect32","lect33","lect34"],
+      "gra" : ["","gram1","gram2","gram3","gram4","gram5","gram6","gram7","gram8","gram9","gram10","gram11","gram12","gram13","gram14","gram15","gram16","gram17","gram18","gram19","gram20","gram21","gram22","gram23","gram24","gram25","gram26","gram27","gram28","gram29","gram30","gram31","gram32","gram33","gram34"],
+      "con" : ["","conj1","conj2","conj3","conj4","conj5","conj6","conj7","conj8","conj9","conj10","conj11","conj12","conj13","conj14","conj15","conj16","conj17","conj18","conj19","conj20","conj21","conj22","conj23","conj24","conj25","conj26","conj27","conj28","conj29","conj30","conj31","conj32","conj33","conj34"],
+      "ort" : ["","orth1","orth2","orth3","orth4","orth5","orth6","orth7","orth8","orth9","orth10","orth11","orth12","orth13","orth14","orth15","orth16","orth17","orth18","orth19","orth20","orth21","orth22","orth23","orth24","orth25","orth26","orth27","orth28","orth29","orth30","orth31","orth32","orth33","orth34"],
+      "lex" : ["","lex1","lex2","lex3","lex4","lex5","lex6","lex7","lex8","lex9","lex10","lex11","lex12","lex13","lex14","lex15","lex16","lex17","lex18","lex19","lex20","lex21","lex22","lex23","lex24","lex25","lex26","lex27","lex28","lex29","lex30","lex31","lex32","lex33","lex34"]
+    }
+  }
+}

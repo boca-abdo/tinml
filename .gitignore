@@ -1,0 +1,3 @@
+.ftpconfig
+includes/db.php
+includes/security.php

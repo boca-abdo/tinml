@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css?family=Cairo'); /* Changa|Crafty+Girls|Aref+Ruqaa|Mada|Reem+Kufi|El+Messiri */
+body,html {
+	font-family: Cairo, times, sans-serif;
+	height: 100vh;
+	font-size: 12px
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+		-o-appearance: none;
+    appearance: none;
+		display: none;
+    margin: 0;
+}
+.dropdown-toggle::after {
+	display: none;
+}
+.btn:focus, .form-control:focus {
+	box-shadow: none
+}
+.card-shadow {
+	box-shadow: 15px 15px 50px #4b4b4b
+}
+.bg-transparent {
+	background: transparent; !IMPORTANT
+}
+#steps-menu a.active {
+	box-shadow: none;
+}
+@media screen and (min-width: 540px) {
+	body,html {
+		font-size: 14px;
+	}
+}
+@media screen and (min-width: 960px) {
+	body,html {
+		font-size: 16px;
+	}
+}
