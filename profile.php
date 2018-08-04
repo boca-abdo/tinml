@@ -269,7 +269,7 @@
 								<?php if ($log_row['classroom'] == null): ?>
                   <h1 class="h1 text-danger animated flash infinite">المرجو تحديث المستوى المدرس</h1>
                 <?php else: ?>
-									<ul class="nav nav-tabs justify-content-center w-100 p-0" id="emploiTab" role="tablist">
+									<ul class="nav nav-tabs nav-fill justify-content-center w-100 p-0" id="emploiTab" role="tablist">
 									  <li class="nav-item">
 									    <a class="btn btn-lg btn-outline-<?php echo $color1 ?> active w-100 rounded-0 border-right-0 border-left-0 border-top-0 border-bottom-0" id="mon-tab" data-toggle="tab" href="#mon" role="tab" aria-controls="mon" aria-selected="true" style="box-shadow:none"><span class="d-md-none">إ</span><span class="d-none d-md-block">اﻹثنين</span></a>
 									  </li>
@@ -289,6 +289,26 @@
 									    <a class="btn btn-lg btn-outline-<?php echo $color1 ?> w-100 rounded-0 border-right-0 border-left-0 border-top-0 border-bottom-0" id="sat-tab" data-toggle="tab" href="#sat" role="tab" aria-controls="sat" aria-selected="false" style="box-shadow:none"><span class="d-md-none">س</span><span class="d-none d-md-block">السبت</span></a>
 									  </li>
 									</ul>
+									<div class="row no-gutters justify-content-center">
+										<div class="col-2">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '1' : $log_row['emploi'];?>" disabled="disabled">
+										</div>
+										<div class="col-2">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '2' : $log_row['emploi'];?>" disabled="disabled">
+										</div>
+										<div class="col-2">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '3' : $log_row['emploi'];?>" disabled="disabled">
+										</div>
+										<div class="col-2">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '4' : $log_row['emploi'];?>" disabled="disabled">
+										</div>
+										<div class="col-2">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '5' : $log_row['emploi'];?>" disabled="disabled">
+										</div>
+										<div class="col-2">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '6' : $log_row['emploi'];?>" disabled="disabled">
+										</div>
+									</div>
 									<div class="tab-content p-3" id="emploiTabContent">
 									  <div class="tab-pane fade show active" id="mon" role="tabpanel" aria-labelledby="mon-tab">
 											<div class="form-row justify-content-center align-items-center">
