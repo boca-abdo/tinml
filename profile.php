@@ -200,21 +200,25 @@
                   <h1 class="h1 text-danger animated flash infinite">المرجو تحديث المستوى المدرس</h1>
                 <?php else: ?>
                     <?php
-                      $json_data = file_get_contents('json/books.txt');
+                      $json_data = file_get_contents('json/books.json');
                       $books = json_decode($json_data, true);
                       $classroom = explode(",",$log_row['classroom']);
-											$comps_arr = array("اللغة العربية","التربية الإسلامية","التربية التشكيلية","النشاط العلمي","الرياضيات","اللغة الفرنسية","الاجتماعيات");
+											$comps_arr = array("اللغة العربية","التربية الإسلامية","التربية التشكيلية","النشاط العلمي","الرياضيات","اللغة الفرنسية","اللغة اﻷمازيغية","الإجتماعيات");
 											$i = 0;
                       foreach ($classroom as $val) {
                         echo "<div class='form-row justify-content-center'><div class='col-12 text-right'><h4 class='h4 text-right mb-3'><u>المستوى ".$val."</u></h4></div>";
 												$j = 0;
 												foreach ($books[$val] as $book_id => $book_arr) {
-													$log_row_book = explode(",", $log_row[$book_id]);
+													$log_row_book = ["","","","","",""];
+													if ($log_row[$book_id] != null) {
+														$log_row_book = explode(",", $log_row[$book_id]);
+													}
+
                     ?>
                     <div class="col-sm-6 col-md-4">
                       <fieldset class="form-group">
 												<label><?php echo $comps_arr[$j] ?></label>
-                        <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" disabled="disabled">
+                        <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" disabled="disabled">
 													<option value="" selected="selected">اختر من القائمة</option>
                     <?php
                           foreach ($book_arr as $book_key => $book_name) {
@@ -506,13 +510,14 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
+		var i,empty,ara_book,isl_book,art_book,sci_book,mth_book,fre_book,soc_book,amz_book,classroom_count;
 		// $('.custom-control-input').prop('indeterminate', true)
     function alertShow(msg) {
       $btn.html('هناك خطأ<i class="fas fa-exclamation-triangle fa-fw mr-2 animated zoomIn infinite"></i>').parents("form").find("div.alert").removeClass("fadeOut d-none").addClass("fadeIn").text(msg);
       setTimeout(function(){alertHide()},5000);
     }
     function alertHide() {
-      $btn.html('حفظ التغييرات<i class="fas fa-save fa-fw mr-2"></i>').parents("form").find("div.alert").removeClass("fadeIn").addClass("fadeOut");
+      $btn.html('حفظ<i class="fas fa-save fa-fw mr-2"></i>').parents("form").find("div.alert").removeClass("fadeIn").addClass("fadeOut");
       setTimeout(function(){$btn.parents("form").find("div.alert").addClass("d-none")},1000);
     }
     function getAca() {
@@ -665,7 +670,14 @@
 			mth_book = [];
 			fre_book = [];
 			soc_book = [];
-			if ($btn.parents("form").find("select").val() == "") {
+			amz_book = [];
+			empty = false;
+			$btn.parents("form").find("select").each(function(){
+				if ($(this).val() == "") {
+					empty = true;
+				}
+			});
+			if (empty) {
 				alertShow("المرجو تعبئة جميع الخانات");
 			} else {
 				i = 0;
@@ -677,8 +689,9 @@
 					sci_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(3)").val());
 					mth_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(4)").val());
 					fre_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(5)").val());
-					if ($btn.parents("form").find("div.form-row:eq("+i+")").find("select").length == 7) {
-						soc_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(6)").val());
+					amz_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(6)").val());
+					if ($btn.parents("form").find("div.form-row:eq("+i+")").find("select").length == 8) {
+						soc_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(7)").val());
 					} else {
 						soc_book.push("00");
 					}
@@ -694,6 +707,7 @@
 						sci_book : sci_book.join(","),
 						mth_book : mth_book.join(","),
 						fre_book : fre_book.join(","),
+						amz_book : amz_book.join(","),
 						soc_book : soc_book.join(",")
 	        },
 	        error: function(stt,xhr,err) {
