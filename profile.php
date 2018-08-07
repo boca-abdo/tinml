@@ -141,7 +141,7 @@
                   <div class="col-sm-6 col-lg-4">
                     <fieldset class="form-group">
                       <label for="aca">اﻷكاديمية</label>
-                      <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="aca" disabled="disabled">
+                      <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="aca" disabled="disabled">
                         <option value='' selected='selected'>اﻷكاديمية</option>
                       </select>
                     </fieldset>
@@ -149,7 +149,7 @@
                   <div class="col-sm-6 col-lg-4">
                     <fieldset class="form-group">
                       <label for="del">المديرية الإقليمية</label>
-                      <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="del" disabled="disabled">
+                      <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="del" disabled="disabled">
                         <option value='' selected='selected'>المديرية الإقليمية</option>
                       </select>
                     </fieldset>
@@ -331,7 +331,7 @@
 												</div>
 												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
 												<?php
-													$comps_data = file_get_contents("json/comps.txt");
+													$comps_data = file_get_contents("json/comps.json");
 													$comps_arr = json_decode($comps_data, true);
 													foreach ($classroom as $class_name) {
 														$i = 0;
@@ -342,7 +342,7 @@
 													<fieldset class="form-group">
 														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
 														<div class="input-group">
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
@@ -350,7 +350,7 @@
 																	}
 																?>
 				                      </select>
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
@@ -389,10 +389,10 @@
 													<fieldset class="form-group">
 														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
 														<div class="input-group">
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 				                      </select>
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
 				                      </select>
 			                      </div>
@@ -427,10 +427,10 @@
 													<fieldset class="form-group">
 														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
 														<div class="input-group">
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 				                      </select>
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
 				                      </select>
 			                      </div>
@@ -464,10 +464,10 @@
 													<fieldset class="form-group">
 														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
 														<div class="input-group">
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 				                      </select>
-															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
 				                      </select>
 			                      </div>
@@ -522,7 +522,7 @@
     }
     function getAca() {
       $.ajax({
-        url: "json/schools.txt",
+        url: "json/schools.json",
         type: "GET",
         error: function(stt,xhr,err) {
           console.log(err);
@@ -543,7 +543,7 @@
     function getDel(ac) {
       $("#del").empty().append("<option value='' selected='selected'>المديرية الإقليمية</option>");
       $.ajax({
-        url: "json/schools.txt",
+        url: "json/schools.json",
         type: "GET",
         error: function(stt,xhr,err) {
           console.log(err);
