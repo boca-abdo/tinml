@@ -15,7 +15,7 @@
                 <i class="fas fa-caret-left ml-2"></i>المعلومات المهنية
               </button>
 							<?php if ($log_row['name_ar'] == null || $log_row['name_fr'] == null || $log_row['doti'] == null): ?>
-							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left" data-toggle="tooltip" data-placement="right" title="المرجو تحديث معلوماتكم المهنية"></i>
 							<?php endif; ?>
             </h5>
           </div>
@@ -66,7 +66,7 @@
                 <i class="fas fa-caret-left ml-2"></i>المستوى المدرس
               </button>
 							<?php if ($log_row['classroom'] == null): ?>
-							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left" data-toggle="tooltip" data-placement="right" title="المرجو تحديث المستوى المدرس"></i>
 							<?php endif; ?>
             </h5>
           </div>
@@ -135,7 +135,7 @@
                 <i class="fas fa-caret-left ml-2"></i>مقر العمل
               </button>
 							<?php if ($log_row['aca'] == null || $log_row['del'] == null || $log_row['sch_ar'] == null || $log_row['sch_fr'] == null): ?>
-							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left" data-toggle="tooltip" data-placement="right" title="المرجو تحديث مقر عملكم"></i>
 							<?php endif; ?>
             </h5>
           </div>
@@ -197,7 +197,7 @@
                 <i class="fas fa-caret-left ml-2"></i>المقررات الدراسية
               </button>
 							<?php if ($log_row['ara_book'] == null || $log_row['isl_book'] == null || $log_row['art_book'] == null || $log_row['sci_book'] == null || $log_row['fre_book'] == null || $log_row['mth_book'] == null): ?>
-							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left" data-toggle="tooltip" data-placement="right" title="المرجو تحديث أسماء الكتب المقررة"></i>
 							<?php endif; ?>
             </h5>
           </div>
@@ -279,7 +279,7 @@
           </div>
           <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
             <div class="card-body bg-<?php echo $color2; ?> text-<?php echo $color1; ?>">
-							<i class="far fa-hourglass fa-3x mb-2"></i>
+							<i class="far fa-clock fa-3x mb-2"></i>
               <h3 class="h3">توزيع الحصص</h3>
               <small class="text-<?php echo $color1; ?>">لمعرفة طريقة تعبئة الخانات المرجو النقر هنا</small>
               <hr class="bg-<?php echo $color1; ?>">
@@ -335,12 +335,12 @@
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="08:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="12:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
@@ -422,12 +422,12 @@
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="08:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="12:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
@@ -711,6 +711,16 @@
 				}
 				updateData("books");
 			}
+    });
+		$("form#emploi").on("click", ".save", function(){
+      $btn = $(this);
+      $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
+			$(this).parents("form").find("div.tab-pane").each(function(){
+				console.log($(this).attr("id"));
+				$(this).find("input[type='time']").each(function(){
+					console.log($(this).val());
+				});
+			});
     });
   });
 </script>
