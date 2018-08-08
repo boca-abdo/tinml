@@ -48,7 +48,7 @@
                   <div class="col-6 col-sm-4 col-md-2">
                     <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
                   </div>
-                  <div class="col-6 col-sm-4 col-md-2">
+                  <div class="col-6 col-sm-4 col-md-2 d-none">
                     <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
                   </div>
                 </div>
@@ -114,7 +114,7 @@
                   <div class="col-6 col-sm-4 col-md-2">
                     <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
                   </div>
-                  <div class="col-6 col-sm-4 col-md-2">
+                  <div class="col-6 col-sm-4 col-md-2 d-none">
                     <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
                   </div>
                 </div>
@@ -173,7 +173,7 @@
                   <div class="col-6 col-sm-4 col-md-2">
                     <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
                   </div>
-                  <div class="col-6 col-sm-4 col-md-2">
+                  <div class="col-6 col-sm-4 col-md-2 d-none">
                     <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
                   </div>
                 </div>
@@ -199,57 +199,56 @@
                 <?php if ($log_row['classroom'] == null): ?>
                   <h1 class="h1 text-danger animated flash infinite">المرجو تحديث المستوى المدرس</h1>
                 <?php else: ?>
-                    <?php
-                      $json_data = file_get_contents('json/books.json');
-                      $books = json_decode($json_data, true);
-                      $classroom = explode(",",$log_row['classroom']);
-											$comps_arr = array("اللغة العربية","التربية الإسلامية","التربية التشكيلية","النشاط العلمي","الرياضيات","اللغة الفرنسية","اللغة اﻷمازيغية","الإجتماعيات");
-											$i = 0;
-                      foreach ($classroom as $val) {
-                        echo "<div class='form-row justify-content-center'><div class='col-12 text-right'><h4 class='h4 text-right mb-3'><u>المستوى ".$val."</u></h4></div>";
-												$j = 0;
-												foreach ($books[$val] as $book_id => $book_arr) {
-													$log_row_book = ["","","","","",""];
-													if ($log_row[$book_id] != null) {
-														$log_row_book = explode(",", $log_row[$book_id]);
+                  <?php
+                    $json_data = file_get_contents('json/books.json');
+                    $books = json_decode($json_data, true);
+                    $classroom = explode(",",$log_row['classroom']);
+										$comps_arr = array("اللغة العربية","التربية الإسلامية","التربية التشكيلية","النشاط العلمي","الرياضيات","اللغة الفرنسية","اللغة اﻷمازيغية","الإجتماعيات");
+										$i = 0;
+                    foreach ($classroom as $val) {
+                      echo "<div class='form-row justify-content-center'><div class='col-12 text-right'><h4 class='h4 text-right mb-3'><u>المستوى ".$val."</u></h4></div>";
+											$j = 0;
+											foreach ($books[$val] as $book_id => $book_arr) {
+												$log_row_book = ["","","","","",""];
+												if ($log_row[$book_id] != null) {
+													$log_row_book = explode(",", $log_row[$book_id]);
+												}
+                  ?>
+                  <div class="col-sm-6 col-md-4">
+                    <fieldset class="form-group">
+											<label><?php echo $comps_arr[$j] ?></label>
+                      <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" disabled="disabled">
+												<option value="" selected="selected">اختر من القائمة</option>
+                  <?php
+                        foreach ($book_arr as $book_key => $book_name) {
+													if ($log_row_book[$i] == $book_key) {
+														echo "<option selected='selected' value='".$book_key."'>".$book_name."</option>";
+													} else {
+														echo "<option value='".$book_key."'>".$book_name."</option>";
 													}
-
-                    ?>
-                    <div class="col-sm-6 col-md-4">
-                      <fieldset class="form-group">
-												<label><?php echo $comps_arr[$j] ?></label>
-                        <select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" disabled="disabled">
-													<option value="" selected="selected">اختر من القائمة</option>
-                    <?php
-                          foreach ($book_arr as $book_key => $book_name) {
-														if ($log_row_book[$i] == $book_key) {
-															echo "<option selected='selected' value='".$book_key."'>".$book_name."</option>";
-														} else {
-															echo "<option value='".$book_key."'>".$book_name."</option>";
-														}
-                          }
-													$j++;
-                    ?>
-                        </select>
-                      </fieldset>
-                    </div>
-                    <?php
                         }
-												echo "</div><hr class='bg-".$color1."'>";
-												$i++;
+												$j++;
+                  ?>
+                      </select>
+                    </fieldset>
+                  </div>
+                  <?php
                       }
-                    ?>
-										<div class="row justify-content-center">
-	                    <div class="w-100">
-	                      <div class="alert alert-danger border border-<?php echo $color1 ?> rounded-0 font-weight-bold d-none m-0 mb-3" role="alert"></div>
-	                    </div>
-		                  <div class="col-6 col-sm-4 col-md-2">
-		                    <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
-		                  </div>
-		                  <div class="col-6 col-sm-4 col-md-2">
-		                    <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
-		                  </div>
-										</div>
+											echo "</div><hr class='bg-".$color1."'>";
+											$i++;
+                    }
+                  ?>
+									<div class="row justify-content-center">
+                    <div class="w-100">
+                      <div class="alert alert-danger border border-<?php echo $color1 ?> rounded-0 font-weight-bold d-none m-0 mb-3" role="alert"></div>
+                    </div>
+	                  <div class="col-6 col-sm-4 col-md-2">
+	                    <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
+	                  </div>
+	                  <div class="col-6 col-sm-4 col-md-2 d-none">
+	                    <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
+	                  </div>
+									</div>
                 <?php endif; ?>
               </form>
             </div>
@@ -477,15 +476,6 @@
 														}
 													}
 												?>
-												<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3">
-			                    <div class="alert alert-danger border border-<?php echo $color1 ?> rounded-0 font-weight-bold d-none m-0 mb-3" role="alert"></div>
-			                  </div>
-			                  <div class="col-6 col-sm-4 col-md-2">
-			                    <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
-			                  </div>
-			                  <div class="col-6 col-sm-4 col-md-2">
-			                    <button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
-			                  </div>
 											</div>
 										</div>
 										<div class="tab-pane fade" id="tue" role="tabpanel" aria-labelledby="tue-tab">
@@ -497,6 +487,17 @@
 										<div class="tab-pane fade" id="fri" role="tabpanel" aria-labelledby="fri-tab">
 										</div>
 										<div class="tab-pane fade" id="sat" role="tabpanel" aria-labelledby="sat-tab">
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3">
+											<div class="alert alert-danger border border-<?php echo $color1 ?> rounded-0 font-weight-bold d-none m-0 mb-3" role="alert"></div>
+										</div>
+										<div class="col-6 col-sm-4 col-md-2">
+											<button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 edit">تعديل<i class="fas fa-pencil-alt mr-2"></i></button>
+										</div>
+										<div class="col-6 col-sm-4 col-md-2 d-none">
+											<button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
 										</div>
 									</div>
 								<?php endif; ?>
@@ -577,6 +578,7 @@
 			$(this).find("input").attr("disabled","disabled").removeClass("form-control").addClass("form-control-plaintext");
     });
     $("form").on("click", ".edit", function(){
+			$(this).parent().addClass("d-none").next().removeClass("d-none");
       $(this).parents("form").find("input,select").removeAttr("disabled").removeClass("form-control-plaintext").addClass("form-control");
     });
     $("form#info").on("click", ".save", function(){
