@@ -14,6 +14,9 @@
               <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 <i class="fas fa-caret-left ml-2"></i>المعلومات المهنية
               </button>
+							<?php if ($log_row['name_ar'] == null || $log_row['name_fr'] == null || $log_row['doti'] == null): ?>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<?php endif; ?>
             </h5>
           </div>
           <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
@@ -62,6 +65,9 @@
               <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-caret-left ml-2"></i>المستوى المدرس
               </button>
+							<?php if ($log_row['classroom'] == null): ?>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<?php endif; ?>
             </h5>
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
@@ -128,6 +134,9 @@
               <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                 <i class="fas fa-caret-left ml-2"></i>مقر العمل
               </button>
+							<?php if ($log_row['aca'] == null || $log_row['del'] == null || $log_row['sch_ar'] == null || $log_row['sch_fr'] == null): ?>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<?php endif; ?>
             </h5>
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
@@ -181,12 +190,15 @@
             </div>
           </div>
         </div>
-        <div class="card border-right-0 border-left-0 border-top-0 border-bottom-0">
+        <div class="card border-right-0 border-left-0 border-top-0 border-bottom-0 <?php echo ($log_row['classroom'] == null) ? "d-none" : ""?>">
           <div class="card-header bg-<?php echo $color1; ?> text-<?php echo $color2; ?> py-0 text-right rounded-0" id="headingFour">
             <h5 class="mb-0">
               <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
                 <i class="fas fa-caret-left ml-2"></i>المقررات الدراسية
               </button>
+							<?php if ($log_row['ara_book'] == null || $log_row['isl_book'] == null || $log_row['art_book'] == null || $log_row['sci_book'] == null || $log_row['fre_book'] == null || $log_row['mth_book'] == null): ?>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left"></i>
+							<?php endif; ?>
             </h5>
           </div>
           <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
@@ -254,12 +266,15 @@
             </div>
           </div>
         </div>
-        <div class="card border-right-0 border-left-0 border-top-0 border-bottom-0">
+        <div class="card border-right-0 border-left-0 border-top-0 border-bottom-0 <?php echo ($log_row['classroom'] == null) ? "d-none" : ""?>">
           <div class="card-header bg-<?php echo $color1; ?> text-<?php echo $color2; ?> py-0 text-right rounded-0" id="headingFive">
             <h5 class="mb-0">
               <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
                 <i class="fas fa-caret-left ml-2"></i>توزيع الحصص
               </button>
+							<?php if ($log_row['emploi'] == null): ?>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left" data-toggle="tooltip" data-placement="right" title="المرجو تحديث معلوماتكم الخاصة بتوزيع الحصص"></i>
+							<?php endif; ?>
             </h5>
           </div>
           <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordion">
@@ -292,7 +307,7 @@
 									    <a class="btn btn-lg btn-outline-<?php echo $color1 ?> w-100 rounded-0 border-right-0 border-left-0 border-top-0 border-bottom-0" id="sat-tab" data-toggle="tab" href="#sat" role="tab" aria-controls="sat" aria-selected="false" style="box-shadow:none"><span class="d-md-none">س</span><span class="d-none d-md-block">السبت</span></a>
 									  </li>
 									</ul>
-									<div class="row no-gutters justify-content-center">
+									<div class="row no-gutters justify-content-center" id="week">
 										<div class="col-2">
 											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '1' : $log_row['emploi'];?>" disabled="disabled">
 										</div>
@@ -511,8 +526,27 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
-		var i,empty,ara_book,isl_book,art_book,sci_book,mth_book,fre_book,soc_book,amz_book,classroom_count;
+		var i,dataset,empty,ara_book,isl_book,art_book,sci_book,mth_book,fre_book,soc_book,amz_book,classroom_count;
 		// $('.custom-control-input').prop('indeterminate', true)
+		$('[data-toggle="tooltip"]').tooltip();
+		function updateData(section) {
+      $.ajax({
+        url: "includes/update_"+section+".php",
+        type: "POST",
+        data: dataset,
+        error: function(stt,xhr,err) {
+          console.log(err);
+        },
+        success: function(res) {
+          if (res === "done") {
+            $btn.html("تم بنجاح<i class='fas fa-thumbs-up animated zoomIn mr-2'></i>");
+            setTimeout(function(){location.reload()},1000);
+          } else {
+            alertShow("حدث خطأ، المرجو اعادة المحاولة لاحقا. اذا استمر المشكل المرجو الاتصال بادارة الموقع");
+          }
+        }
+      });
+		}
     function alertShow(msg) {
       $btn.html('هناك خطأ<i class="fas fa-exclamation-triangle fa-fw mr-2 animated zoomIn infinite"></i>').parents("form").find("div.alert").removeClass("fadeOut d-none").addClass("fadeIn").text(msg);
       setTimeout(function(){alertHide()},5000);
@@ -578,33 +612,36 @@
 			$(this).find("input").attr("disabled","disabled").removeClass("form-control").addClass("form-control-plaintext");
     });
     $("form").on("click", ".edit", function(){
-			$(this).parent().addClass("d-none").next().removeClass("d-none");
-      $(this).parents("form").find("input,select").removeAttr("disabled").removeClass("form-control-plaintext").addClass("form-control");
+      $(this).parent().addClass("d-none").next().removeClass("d-none").parents("form").find("input,select").removeAttr("disabled").removeClass("form-control-plaintext").addClass("form-control");
     });
-    $("form#info").on("click", ".save", function(){
+		$("form#emploi").on("change keyup", "#week input", function(){
+			i = Number($(this).val());
+			if (i < 1 || i > 6) {
+				$(this).val(1);
+				i = 1;
+			}
+			$(this).parent().nextAll().each(function(){
+				i++;
+				if (i == 7) {
+					i = 1;
+				}
+				$(this).find("input").val(i);
+			});
+			i = Number($(this).val());
+			$(this).parent().prevAll().each(function(){
+				i--;
+				if (i == 0) {
+					i = 6;
+				}
+				$(this).find("input").val(i);
+			});
+		});
+		$("form#info").on("click", ".save", function(){
       $btn = $(this);
-      $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
-      $.ajax({
-        url: "includes/update_info.php",
-        type: "POST",
-        data: {
-          name_ar: $("#name_ar").val().trim(),
-          name_fr: $("#name_fr").val().trim(),
-          doti: $("#doti").val()
-        },
-        error: function(stt,xhr,err) {
-          console.log(err);
-        },
-        success: function(res) {
-          if (res === "done") {
-            $btn.html("تم بنجاح<i class='fas fa-thumbs-up animated zoomIn mr-2'></i>");
-            setTimeout(function(){location.reload()},1000);
-          } else {
-            alertShow("حدث خطأ، المرجو اعادة المحاولة لاحقا. اذا استمر المشكل المرجو الاتصال بادارة الموقع");
-          }
-        }
-      });
-    });
+			$btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
+      dataset = {name_ar: $("#name_ar").val().trim(),name_fr: $("#name_fr").val().trim(),doti: $("#doti").val()};
+			updateData("info");
+		});
     $("form#classroom").on("click", ".save", function(){
       classroom = [];
       $btn = $(this);
@@ -615,52 +652,15 @@
 			if (classroom.length == 0) {
 				alertShow("المرجو اختيار مستوى واحد على اﻷقل");
 			} else {
-				$.ajax({
-	        url: "includes/update_classroom.php",
-	        type: "POST",
-	        data: {
-	          classroom: classroom.join(",")
-	        },
-	        error: function(stt,xhr,err) {
-	          console.log(err);
-	        },
-	        success: function(res) {
-	          if (res === "done") {
-	            $btn.html("تم بنجاح<i class='fas fa-thumbs-up animated zoomIn mr-2'></i>");
-	            setTimeout(function(){location.reload()},1000);
-	          } else {
-	            alertShow("حدث خطأ، المرجو اعادة المحاولة لاحقا. اذا استمر المشكل المرجو الاتصال بادارة الموقع");
-	            console.log(res);
-	          }
-	        }
-	      });
+				dataset = {classroom: classroom.join(",")};
+				updateData("classroom");
 			}
     });
     $("form#school").on("click", ".save", function(){
       $btn = $(this);
       $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
-      $.ajax({
-        url: "includes/update_school.php",
-        type: "POST",
-        data: {
-          aca: $("#aca").val().trim(),
-          del: $("#del").val().trim(),
-          sch_ar: $("#sch_ar").val().trim(),
-          sch_fr: $("#sch_fr").val().trim()
-        },
-        error: function(stt,xhr,err) {
-          console.log(err);
-        },
-        success: function(res) {
-          if (res === "done") {
-            $btn.html("تم بنجاح<i class='fas fa-thumbs-up animated zoomIn mr-2'></i>");
-            setTimeout(function(){location.reload()},1000);
-          } else {
-            alertShow("حدث خطأ، المرجو اعادة المحاولة لاحقا. اذا استمر المشكل المرجو الاتصال بادارة الموقع");
-            console.log(res);
-          }
-        }
-      });
+			dataset = {aca: $("#aca").val().trim(),del: $("#del").val().trim(),sch_ar: $("#sch_ar").val().trim(),sch_fr: $("#sch_fr").val().trim()};
+      updateData("school");
     });
 		$("form#books").on("click", ".save", function(){
       $btn = $(this);
@@ -699,32 +699,17 @@
 					}
 					i++;
 				}
-				$.ajax({
-	        url: "includes/update_books.php",
-	        type: "POST",
-	        data: {
-						ara_book : ara_book.join(","),
-						isl_book : isl_book.join(","),
-						art_book : art_book.join(","),
-						sci_book : sci_book.join(","),
-						mth_book : mth_book.join(","),
-						fre_book : fre_book.join(","),
-						amz_book : amz_book.join(","),
-						soc_book : soc_book.join(",")
-	        },
-	        error: function(stt,xhr,err) {
-	          console.log(err);
-	        },
-	        success: function(res) {
-	          if (res === "done") {
-	            $btn.html("تم بنجاح<i class='fas fa-thumbs-up animated zoomIn mr-2'></i>");
-	            setTimeout(function(){location.reload()},1000);
-	          } else {
-	            alertShow("حدث خطأ، المرجو اعادة المحاولة لاحقا. اذا استمر المشكل المرجو الاتصال بادارة الموقع");
-	            console.log(res);
-	          }
-	        }
-	      });
+				dataset = {
+					ara_book : ara_book.join(","),
+					isl_book : isl_book.join(","),
+					art_book : art_book.join(","),
+					sci_book : sci_book.join(","),
+					mth_book : mth_book.join(","),
+					fre_book : fre_book.join(","),
+					amz_book : amz_book.join(","),
+					soc_book : soc_book.join(",")
+				}
+				updateData("books");
 			}
     });
   });

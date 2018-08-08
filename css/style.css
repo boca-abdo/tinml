@@ -13,6 +13,9 @@ input[type=number]::-webkit-outer-spin-button {
 		display: none;
     margin: 0;
 }
+.tooltip {
+	font-family: inherit;
+}
 .dropdown-toggle::after {
 	display: none;
 }
