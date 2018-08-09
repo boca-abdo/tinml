@@ -385,7 +385,7 @@
 															<div class="input-group-prepend">
 														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest1">استراحة</label>
 														  </div>
-															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="mon4_dur" disabled="disabled">
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest1" disabled="disabled">
 																<option>05</option>
 																<option>10</option>
 				                        <option selected='selected'>15</option>
@@ -405,9 +405,19 @@
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
 				                      </select>
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
 				                      </select>
 			                      </div>
 													</fieldset>
@@ -443,9 +453,19 @@
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
 				                      </select>
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
 				                      </select>
 			                      </div>
 													</fieldset>
@@ -480,9 +500,19 @@
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
 				                      </select>
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
 				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
 				                      </select>
 			                      </div>
 													</fieldset>
@@ -494,14 +524,979 @@
 											</div>
 										</div>
 										<div class="tab-pane fade" id="tue" role="tabpanel" aria-labelledby="tue-tab">
+											<div class="form-row justify-content-center align-items-center">
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة الصباحية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													$comps_data = file_get_contents("json/comps.json");
+													$comps_arr = json_decode($comps_data, true);
+													foreach ($classroom as $class_name) {
+														$i = 0;
+														while ($i < 4) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest1">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest1" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 4;
+														while ($i < 8) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3"></div>
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة المسائية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 8;
+														while ($i < 12) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest2">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest2" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 12;
+														while ($i < 16) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+											</div>
 										</div>
 										<div class="tab-pane fade" id="wed" role="tabpanel" aria-labelledby="wed-tab">
+											<div class="form-row justify-content-center align-items-center">
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة الصباحية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													$comps_data = file_get_contents("json/comps.json");
+													$comps_arr = json_decode($comps_data, true);
+													foreach ($classroom as $class_name) {
+														$i = 0;
+														while ($i < 4) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest1">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest1" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 4;
+														while ($i < 8) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3"></div>
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة المسائية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 8;
+														while ($i < 12) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest2">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest2" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 12;
+														while ($i < 16) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+											</div>
 										</div>
 										<div class="tab-pane fade" id="thu" role="tabpanel" aria-labelledby="thu-tab">
+											<div class="form-row justify-content-center align-items-center">
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة الصباحية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													$comps_data = file_get_contents("json/comps.json");
+													$comps_arr = json_decode($comps_data, true);
+													foreach ($classroom as $class_name) {
+														$i = 0;
+														while ($i < 4) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest1">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest1" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 4;
+														while ($i < 8) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3"></div>
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة المسائية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 8;
+														while ($i < 12) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest2">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest2" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 12;
+														while ($i < 16) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+											</div>
 										</div>
 										<div class="tab-pane fade" id="fri" role="tabpanel" aria-labelledby="fri-tab">
+											<div class="form-row justify-content-center align-items-center">
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة الصباحية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													$comps_data = file_get_contents("json/comps.json");
+													$comps_arr = json_decode($comps_data, true);
+													foreach ($classroom as $class_name) {
+														$i = 0;
+														while ($i < 4) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest1">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest1" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 4;
+														while ($i < 8) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3"></div>
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة المسائية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 8;
+														while ($i < 12) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest2">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest2" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 12;
+														while ($i < 16) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+											</div>
 										</div>
 										<div class="tab-pane fade" id="sat" role="tabpanel" aria-labelledby="sat-tab">
+											<div class="form-row justify-content-center align-items-center">
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة الصباحية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													$comps_data = file_get_contents("json/comps.json");
+													$comps_arr = json_decode($comps_data, true);
+													foreach ($classroom as $class_name) {
+														$i = 0;
+														while ($i < 4) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest1">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest1" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 4;
+														while ($i < 8) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 border border-<?php echo $color1 ?> border-right-0 border-bottom-0 border-left-0 my-3"></div>
+												<div class="col-sm-6 text-right">
+													<h4 class="h4 mr-3">الفترة المسائية</h3>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="col-6 col-sm-3">
+													<fieldset class="form-group m-0">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+													</fieldset>
+												</div>
+												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 8;
+														while ($i < 12) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+												<div class="w-100 bg-<?php echo $color1 ?> my-3">
+													<fieldset class="form-group row justify-content-center mb-0">
+														<div class="input-group col-6 mx-auto">
+															<div class="input-group-prepend">
+														    <label class="input-group-text rounded-0 text-<?php echo $color2 ?> text-center bg-transparent border-right-0 border-left-0 border-top-0 border-bottom-0" for="rest2">استراحة</label>
+														  </div>
+															<select class="custom-select bg-<?php echo $color1 ?> text-<?php echo $color2 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 p-0" style="text-align-last:center" id="rest2" disabled="disabled">
+																<option>05</option>
+																<option>10</option>
+				                        <option selected='selected'>15</option>
+				                      </select>
+			                      </div>
+													</fieldset>
+			                  </div>
+												<?php
+													foreach ($classroom as $class_name) {
+														$i = 12;
+														while ($i < 16) {
+															$i++;
+												?>
+												<div class="col-6 col-md-3">
+													<fieldset class="form-group">
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<div class="input-group">
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
+				                        <option value='' selected='selected'>المكون</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
+																		echo '<option>'.$comp.'</option>';
+																	}
+																?>
+				                      </select>
+															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_dur" disabled="disabled">
+				                        <option value='' selected='selected'>المدة</option>
+																<?php
+																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
+																		echo '<option>'.$duration.'</option>';
+																	}
+																?>
+				                      </select>
+			                      </div>
+													</fieldset>
+												</div>
+												<?php
+														}
+													}
+												?>
+											</div>
 										</div>
 									</div>
 									<div class="row justify-content-center">
@@ -735,13 +1730,53 @@
 		$("form#emploi").on("click", ".save", function(){
       $btn = $(this);
       $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
+			var times = [],
+			comps = [],
+			durations = [],
+			week = [];
+			$("#week").find("input").each(function(){
+				week.push($(this).val());
+			});
 			$(this).parents("form").find("div.tab-pane").each(function(){
-				console.log($(this).attr("id"));
+				var day = $(this).attr("id");
+				times[day] = [];
 				$(this).find("input[type='time']").each(function(){
-					console.log($(this).val());
+					times[day].push($(this).val());
+				});
+				comps[day] = [];
+				durations[day] = [];
+				var i = 0;
+				$(this).find("select:not(#rest1,#rest2)").each(function(){
+					if (i % 2 === 0) {
+						comps[day].push($(this).val());
+					} else {
+						durations[day].push($(this).val());
+					}
+					i++;
 				});
 			});
-    });
+			dataset = {
+				week = week.join(","),
+				mon_times = times["mon"].join(","),
+				mon_comps = comps["mon"].join(","),
+				mon_durations = durations["mon"].join(","),
+				tue_times = times["tue"].join(","),
+				tue_comps = comps["tue"].join(","),
+				tue_durations = durations["tue"].join(","),
+				wed_times = times["wed"].join(","),
+				wed_comps = comps["wed"].join(","),
+				wed_durations = durations["wed"].join(","),
+				thu_times = times["thu"].join(","),
+				thu_comps = comps["thu"].join(","),
+				thu_durations = durations["thu"].join(","),
+				fri_times = times["fri"].join(","),
+				fri_comps = comps["fri"].join(","),
+				fri_durations = durations["fri"].join(","),
+				sat_times = times["sat"].join(","),
+				sat_comps = comps["sat"].join(","),
+				sat_durations = durations["sat"].join(","),
+			}
+		});
   });
 </script>
 <?php include 'assets/footer.php'; ?>
