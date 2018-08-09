@@ -526,7 +526,7 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function(){
-		var i,dataset,empty,ara_book,isl_book,art_book,sci_book,mth_book,fre_book,soc_book,amz_book,classroom_count;
+		var dataset;
 		// $('.custom-control-input').prop('indeterminate', true)
 		$('[data-toggle="tooltip"]').tooltip();
 		function updateData(section) {
@@ -598,7 +598,7 @@
     getAca();
     $("#aca").on('change', function(){
       $("#del").empty().append("<option value='' selected='selected'>المديرية الإقليمية</option>");
-      aca = $(this).val();
+      var aca = $(this).val();
       if (aca != "") {
         getDel(aca);
 				$("#sch_ar,#sch_fr").val("");
@@ -611,7 +611,7 @@
       $(this).find("i:first").removeClass("fa-caret-down").addClass("fa-caret-left");
 			$(this).find("input").attr("disabled","disabled").removeClass("form-control").addClass("form-control-plaintext");
     });
-    $("form").on("click", ".edit", function(){
+		$("form").on("click", ".edit", function(){
       $(this).parent().addClass("d-none").next().removeClass("d-none").parents("form").find("input,select").removeAttr("disabled").removeClass("form-control-plaintext").addClass("form-control");
     });
 		$("form#emploi").on("change keyup", "#week input", function(){
@@ -639,11 +639,22 @@
 		$("form#info").on("click", ".save", function(){
       $btn = $(this);
 			$btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
-      dataset = {name_ar: $("#name_ar").val().trim(),name_fr: $("#name_fr").val().trim(),doti: $("#doti").val()};
-			updateData("info");
+			var match_error;
+			if ($("#name_fr").val().trim().match(/[^a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/)){
+				match_error = $("#name_fr").val().trim().match(/[^a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/);
+				alertShow("الرمز "+match_error[0]+" غير مسموح به");
+			} else if ($("#name_ar").val().trim().match(/[^أ-ي ]/)) {
+				match_error = $("#name_ar").val().trim().match(/[^أ-ي ]/);
+				alertShow("الرمز "+match_error[0]+" غير مسموح به");
+			} else if ($("#doti").val().trim().match(/[^0-9]/)) {
+				alertShow("المرجو استعمال اﻷرقام فقط");
+			} else {
+				dataset = {name_ar: $("#name_ar").val().trim(),name_fr: $("#name_fr").val().trim(),doti: $("#doti").val()};
+				updateData("info");
+			}
 		});
     $("form#classroom").on("click", ".save", function(){
-      classroom = [];
+      var classroom = [];
       $btn = $(this);
       $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
       $(this).parents("form").find("input:checked").each(function () {
@@ -659,20 +670,29 @@
     $("form#school").on("click", ".save", function(){
       $btn = $(this);
       $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
-			dataset = {aca: $("#aca").val().trim(),del: $("#del").val().trim(),sch_ar: $("#sch_ar").val().trim(),sch_fr: $("#sch_fr").val().trim()};
-      updateData("school");
+			var match_error;
+			if ($("#sch_fr").val().trim().match(/[^a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ]/)){
+				match_error = $("#sch_fr").val().trim().match(/[^a-zA-Z àâäèéêëîïôœùûüÿçÀÂÄÈÉÊËÎÏÔŒÙÛÜŸÇ.]/);
+				alertShow("الرمز "+match_error[0]+" غير مسموح به");
+			} else if ($("#sch_ar").val().trim().match(/[^أ-ي .]/)) {
+				match_error = $("#sch_ar").val().trim().match(/[^أ-ي .]/);
+				alertShow("الرمز "+match_error[0]+" غير مسموح به");
+			} else {
+				dataset = {aca: $("#aca").val().trim(),del: $("#del").val().trim(),sch_ar: $("#sch_ar").val().trim(),sch_fr: $("#sch_fr").val().trim()};
+	      updateData("school");
+			}
     });
 		$("form#books").on("click", ".save", function(){
       $btn = $(this);
       $btn.html("المرجو الانتظار<i class='fas fa-spinner fa-spin mr-2'></i>");
-			ara_book = [];
-			isl_book = [];
-			art_book = [];
-			sci_book = [];
-			mth_book = [];
-			fre_book = [];
-			soc_book = [];
-			amz_book = [];
+			var ara_book = [],
+			isl_book = [],
+			art_book = [],
+			sci_book = [],
+			mth_book = [],
+			fre_book = [],
+			soc_book = [],
+			amz_book = [],
 			empty = false;
 			$btn.parents("form").find("select").each(function(){
 				if ($(this).val() == "") {
@@ -682,7 +702,7 @@
 			if (empty) {
 				alertShow("المرجو تعبئة جميع الخانات");
 			} else {
-				i = 0;
+				var i = 0,
 				classroom_count = $btn.parents("form").find("div.form-row").length;
 				while (i <= classroom_count-1) {
 					ara_book.push($btn.parents("form").find("div.form-row:eq("+i+")").find("select:eq(0)").val());
