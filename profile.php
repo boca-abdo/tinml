@@ -1538,7 +1538,8 @@
             setTimeout(function(){location.reload()},1000);
           } else {
             alertShow("حدث خطأ، المرجو اعادة المحاولة لاحقا. اذا استمر المشكل المرجو الاتصال بادارة الموقع");
-          }
+						console.log(res);
+					}
         }
       });
 		}
@@ -1756,26 +1757,28 @@
 				});
 			});
 			dataset = {
-				week = week.join(","),
-				mon_times = times["mon"].join(","),
-				mon_comps = comps["mon"].join(","),
-				mon_durations = durations["mon"].join(","),
-				tue_times = times["tue"].join(","),
-				tue_comps = comps["tue"].join(","),
-				tue_durations = durations["tue"].join(","),
-				wed_times = times["wed"].join(","),
-				wed_comps = comps["wed"].join(","),
-				wed_durations = durations["wed"].join(","),
-				thu_times = times["thu"].join(","),
-				thu_comps = comps["thu"].join(","),
-				thu_durations = durations["thu"].join(","),
-				fri_times = times["fri"].join(","),
-				fri_comps = comps["fri"].join(","),
-				fri_durations = durations["fri"].join(","),
-				sat_times = times["sat"].join(","),
-				sat_comps = comps["sat"].join(","),
-				sat_durations = durations["sat"].join(","),
-			}
+				niv : "<?php echo $log_row['classroom']?>",
+				week : week.join(","),
+				mon_times : times["mon"].join(","),
+				mon_comps : comps["mon"].join(","),
+				mon_durations : durations["mon"].join(","),
+				tue_times : times["tue"].join(","),
+				tue_comps : comps["tue"].join(","),
+				tue_durations : durations["tue"].join(","),
+				wed_times : times["wed"].join(","),
+				wed_comps : comps["wed"].join(","),
+				wed_durations : durations["wed"].join(","),
+				thu_times : times["thu"].join(","),
+				thu_comps : comps["thu"].join(","),
+				thu_durations : durations["thu"].join(","),
+				fri_times : times["fri"].join(","),
+				fri_comps : comps["fri"].join(","),
+				fri_durations : durations["fri"].join(","),
+				sat_times : times["sat"].join(","),
+				sat_comps : comps["sat"].join(","),
+				sat_durations : durations["sat"].join(",")
+			};
+			updateData("emploi");
 		});
   });
 </script>
