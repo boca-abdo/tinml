@@ -2,7 +2,7 @@
 	include 'assets/header.php';
 ?>
 <div class="container">
-	<div class="card border-secondary rounded-0 card-shadow text-center">
+	<div class="card border-<?php echo $color2?> rounded-0 text-center">
     <div class="card-header bg-<?php echo $color2; ?> text-<?php echo $color1; ?> rounded-0">
       <h2 class="h2 card-title font-weight-bold">إعدادات المستخدم</h2>
     </div>
@@ -284,9 +284,64 @@
               <small class="text-<?php echo $color1; ?>">لمعرفة طريقة تعبئة الخانات المرجو النقر هنا</small>
               <hr class="bg-<?php echo $color1; ?>">
               <form id="emploi">
-								<?php if ($log_row['classroom'] == null): ?>
+								<?php
+									if ($log_row['classroom'] == null) {
+								?>
                   <h1 class="h1 text-danger animated flash infinite">المرجو تحديث المستوى المدرس</h1>
-                <?php else: ?>
+                <?php
+									} else {
+										$week = array("1","2","3","4","5","6");
+										$mon_times = array("00:00","00:00","00:00","00:00");
+										$tue_times = array("00:00","00:00","00:00","00:00");
+										$wed_times = array("00:00","00:00","00:00","00:00");
+										$thu_times = array("00:00","00:00","00:00","00:00");
+										$fri_times = array("00:00","00:00","00:00","00:00");
+										$sat_times = array("00:00","00:00","00:00","00:00");
+										$mon_comps = array("","","","","","","","","","","","","","","","");
+										$tue_comps = array("","","","","","","","","","","","","","","","");
+										$wed_comps = array("","","","","","","","","","","","","","","","");
+										$thu_comps = array("","","","","","","","","","","","","","","","");
+										$fri_comps = array("","","","","","","","","","","","","","","","");
+										$sat_comps = array("","","","","","","","","","","","","","","","");
+										$mon_durations = array("","","","","","","","","","","","","","","","");
+										$tue_durations = array("","","","","","","","","","","","","","","","");
+										$wed_durations = array("","","","","","","","","","","","","","","","");
+										$thu_durations = array("","","","","","","","","","","","","","","","");
+										$fri_durations = array("","","","","","","","","","","","","","","","");
+										$sat_durations = array("","","","","","","","","","","","","","","","");
+										if ($log_row['emploi'] == null) {
+											$niv = $log_row['classroom'];
+											$emploi_stmt = $tinml_con->query("SELECT * FROM emplois WHERE niveau='$niv'");
+											$emploi_stmt->setFetchMode(PDO::FETCH_ASSOC);
+							        while($emploi_row = $emploi_stmt->fetch()) {
+												// show different types of emploi in category
+											}
+										} else {
+											$emploi_id = $log_row['emploi'];
+											$emploi_stmt = $tinml_con->query("SELECT * FROM emplois WHERE id='$emploi_id'");
+											$emploi_stmt->setFetchMode(PDO::FETCH_ASSOC);
+							        $emploi_row = $emploi_stmt->fetch();
+											$week = explode(",",$emploi_row['week']);
+											$mon_times = explode(",",$emploi_row['mon_times']);
+											$tue_times = explode(",",$emploi_row['tue_times']);
+											$wed_times = explode(",",$emploi_row['wed_times']);
+											$thu_times = explode(",",$emploi_row['thu_times']);
+											$fri_times = explode(",",$emploi_row['fri_times']);
+											$sat_times = explode(",",$emploi_row['sat_times']);
+											$mon_comps = explode(",",$emploi_row['mon_comps']);
+											$tue_comps = explode(",",$emploi_row['tue_comps']);
+											$wed_comps = explode(",",$emploi_row['wed_comps']);
+											$thu_comps = explode(",",$emploi_row['thu_comps']);
+											$fri_comps = explode(",",$emploi_row['fri_comps']);
+											$sat_comps = explode(",",$emploi_row['sat_comps']);
+											$mon_durations = explode(",",$emploi_row['mon_durations']);
+											$tue_durations = explode(",",$emploi_row['tue_durations']);
+											$wed_durations = explode(",",$emploi_row['wed_durations']);
+											$thu_durations = explode(",",$emploi_row['thu_durations']);
+											$fri_durations = explode(",",$emploi_row['fri_durations']);
+											$sat_durations = explode(",",$emploi_row['sat_durations']);
+										}
+								?>
 									<ul class="nav nav-tabs nav-fill justify-content-center w-100 p-0" id="emploiTab" role="tablist">
 									  <li class="nav-item">
 									    <a class="btn btn-lg btn-outline-<?php echo $color1 ?> active w-100 rounded-0 border-right-0 border-left-0 border-top-0 border-bottom-0" id="mon-tab" data-toggle="tab" href="#mon" role="tab" aria-controls="mon" aria-selected="true" style="box-shadow:none"><span class="d-md-none">إ</span><span class="d-none d-md-block">اﻹثنين</span></a>
@@ -309,22 +364,22 @@
 									</ul>
 									<div class="row no-gutters justify-content-center" id="week">
 										<div class="col-2">
-											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '1' : $log_row['emploi'];?>" disabled="disabled">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo $week[0];?>" disabled="disabled">
 										</div>
 										<div class="col-2">
-											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '2' : $log_row['emploi'];?>" disabled="disabled">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo $week[1];?>" disabled="disabled">
 										</div>
 										<div class="col-2">
-											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '3' : $log_row['emploi'];?>" disabled="disabled">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo $week[2];?>" disabled="disabled">
 										</div>
 										<div class="col-2">
-											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '4' : $log_row['emploi'];?>" disabled="disabled">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo $week[3];?>" disabled="disabled">
 										</div>
 										<div class="col-2">
-											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '5' : $log_row['emploi'];?>" disabled="disabled">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo $week[4];?>" disabled="disabled">
 										</div>
 										<div class="col-2">
-											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo ($log_row['emploi'] == null) ? '6' : $log_row['emploi'];?>" disabled="disabled">
+											<input type="number" min="1" max="6" step="1" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" value="<?php echo $week[5];?>" disabled="disabled">
 										</div>
 									</div>
 									<div class="tab-content p-3" id="emploiTabContent">
@@ -335,12 +390,12 @@
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="<?php echo $mon_times[0]; ?>" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="<?php echo $mon_times[1]; ?>" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
@@ -350,17 +405,20 @@
 													foreach ($classroom as $class_name) {
 														$i = 0;
 														while ($i < 4) {
-															$i++;
 												?>
 												<div class="col-6 col-md-3">
 													<fieldset class="form-group">
-														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? ($i+1)." (م ".$class_name.")" : ($i+1) ?></span></label>
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
-																		echo '<option>'.$comp.'</option>';
+																		if ($mon_comps[$i] == $comp) {
+																			echo '<option selected="selected">'.$comp.'</option>';
+																		} else {
+																			echo '<option>'.$comp.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -368,7 +426,11 @@
 				                        <option value='' selected='selected'>المدة</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
-																		echo '<option>'.$duration.'</option>';
+																		if ($mon_durations[$i] == $duration) {
+																			echo '<option selected="selected">'.$duration.'</option>';
+																		} else {
+																			echo '<option>'.$duration.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -376,6 +438,7 @@
 													</fieldset>
 												</div>
 												<?php
+														$i++;
 														}
 													}
 												?>
@@ -395,19 +458,21 @@
 			                  </div>
 												<?php
 													foreach ($classroom as $class_name) {
-														$i = 4;
 														while ($i < 8) {
-															$i++;
 												?>
 												<div class="col-6 col-md-3">
 													<fieldset class="form-group">
-														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? ($i+1)." (م ".$class_name.")" : ($i+1) ?></span></label>
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
-																		echo '<option>'.$comp.'</option>';
+																		if ($mon_comps[$i] == $comp) {
+																			echo '<option selected="selected">'.$comp.'</option>';
+																		} else {
+																			echo '<option>'.$comp.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -415,7 +480,11 @@
 				                        <option value='' selected='selected'>المدة</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
-																		echo '<option>'.$duration.'</option>';
+																		if ($mon_durations[$i] == $duration) {
+																			echo '<option selected="selected">'.$duration.'</option>';
+																		} else {
+																			echo '<option>'.$duration.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -423,6 +492,7 @@
 													</fieldset>
 												</div>
 												<?php
+														$i++;
 														}
 													}
 												?>
@@ -432,30 +502,32 @@
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="00:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_start" value="<?php echo $mon_times[2]; ?>" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="col-6 col-sm-3">
 													<fieldset class="form-group m-0">
-														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="00:00" disabled="disabled">
+														<input type="time" class="form-control-plaintext text-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="mon_end" value="<?php echo $mon_times[3]; ?>" disabled="disabled">
 													</fieldset>
 												</div>
 												<div class="w-100 border border-<?php echo $color1 ?> border-top-0 border-left-0 border-right-0 mb-3"></div>
 												<?php
 													foreach ($classroom as $class_name) {
-														$i = 8;
 														while ($i < 12) {
-															$i++;
 												?>
 												<div class="col-6 col-md-3">
 													<fieldset class="form-group">
-														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? ($i+1)." (م ".$class_name.")" : ($i+1) ?></span></label>
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
-																		echo '<option>'.$comp.'</option>';
+																		if ($mon_comps[$i] == $comp) {
+																			echo '<option selected="selected">'.$comp.'</option>';
+																		} else {
+																			echo '<option>'.$comp.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -463,7 +535,11 @@
 				                        <option value='' selected='selected'>المدة</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
-																		echo '<option>'.$duration.'</option>';
+																		if ($mon_durations[$i] == $duration) {
+																			echo '<option selected="selected">'.$duration.'</option>';
+																		} else {
+																			echo '<option>'.$duration.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -471,6 +547,7 @@
 													</fieldset>
 												</div>
 												<?php
+														$i++;
 														}
 													}
 												?>
@@ -490,19 +567,21 @@
 			                  </div>
 												<?php
 													foreach ($classroom as $class_name) {
-														$i = 12;
 														while ($i < 16) {
-															$i++;
 												?>
 												<div class="col-6 col-md-3">
 													<fieldset class="form-group">
-														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? $i." (م ".$class_name.")" : $i ?></span></label>
+														<label for="mon<?php echo $i ?>"><span class="badge badge-pill badge-<?php echo $color1 ?>">الحصة <?php echo (count($classroom) > 1) ? ($i+1)." (م ".$class_name.")" : ($i+1) ?></span></label>
 														<div class="input-group">
 															<select class="custom-select bg-<?php echo $color2 ?> text-<?php echo $color1 ?> text-center font-weight-bold rounded-0 border-top-0 border-right-0 border-left-0 border-bottom-0 py-0 px-1" style="text-align-last:center" id="mon<?php echo $i ?>_comp" disabled="disabled">
 				                        <option value='' selected='selected'>المكون</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["comps"] as $comp) {
-																		echo '<option>'.$comp.'</option>';
+																		if ($mon_comps[$i] == $comp) {
+																			echo '<option selected="selected">'.$comp.'</option>';
+																		} else {
+																			echo '<option>'.$comp.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -510,7 +589,11 @@
 				                        <option value='' selected='selected'>المدة</option>
 																<?php
 																	foreach ($comps_arr[$class_name]["durations"] as $duration) {
-																		echo '<option>'.$duration.'</option>';
+																		if ($mon_durations[$i] == $duration) {
+																			echo '<option selected="selected">'.$duration.'</option>';
+																		} else {
+																			echo '<option>'.$duration.'</option>';
+																		}
 																	}
 																?>
 				                      </select>
@@ -518,6 +601,7 @@
 													</fieldset>
 												</div>
 												<?php
+														$i++;
 														}
 													}
 												?>
@@ -1510,13 +1594,126 @@
 											<button type="button" class="btn btn-block btn-<?php echo $color1 ?> rounded-0 save">حفظ<i class="fas fa-save mr-2"></i></button>
 										</div>
 									</div>
-								<?php endif; ?>
+								<?php } ?>
 							</form>
             </div>
           </div>
         </div>
-      </div>
+				<div class="card border-right-0 border-left-0 border-top-0 border-bottom-0">
+          <div class="card-header bg-<?php echo $color1; ?> text-<?php echo $color2; ?> py-0 text-right rounded-0" id="headingSix">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                <i class="fas fa-caret-left ml-2"></i>إعدادات التنسيق
+              </button>
+            </h5>
+          </div>
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordion">
+            <div class="card-body bg-<?php echo $color2; ?> text-<?php echo $color1; ?>">
+							<i class="fas fa-palette fa-3x mb-2"></i>
+              <h3 class="h3">إعدادات التنسيق</h3>
+							<small class="text-<?php echo $color1; ?>">اضغط على الصورة لحجم أكبر</small>
+              <hr class="bg-<?php echo $color1; ?>">
+              <form id="theme">
+								<div class="row justify-content-center">
+									<?php
+										$color1_arr = array("light","dark","light","info","warning","dark","info","dark");
+										$color2_arr = array("dark","light","info","light","dark","warning","dark","info");
+										$i = 0;
+										while ($i < count($color1_arr)) {
+									?>
+									<div class="col-6 col-sm-4 col-md-3 py-3">
+										<div class="card border-<?php echo $color1?> rounded-0 text-center">
+											<img class="card-img-top" src="images/theme<?php echo $i+1?>.png" alt="Card image cap" style="cursor:zoom-in">
+										</div>
+										<div class="card-body px-0 px-sm-2 px-lg-4">
+											<button type="button" class="btn btn-block btn-outline-<?php echo $color1?> rounded-0 <?php echo ($color1_arr[$i] == $color1 && $color2_arr[$i] == $color2) ? "disabled" : ""?>" data-color1="<?php echo $color1_arr[$i]?>" data-color2="<?php echo $color2_arr[$i]?>"><?php echo ($color1_arr[$i] == $color1 && $color2_arr[$i] == $color2) ? "التنسيق الحالي" : "اختيار التنسيق"?></button>
+										</div>
+									</div>
+									<?php
+											$i++;
+										}
+									?>
+								</div>
+              </form>
+            </div>
+          </div>
+        </div>
+				<div class="card border-right-0 border-left-0 border-top-0 border-bottom-0">
+          <div class="card-header bg-<?php echo $color1; ?> text-<?php echo $color2; ?> py-0 text-right rounded-0" id="headingSeven">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-<?php echo $color2; ?>" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+                <i class="fas fa-caret-left ml-2"></i>إعدادات الحساب
+              </button>
+							<?php if ($log_row['activated'] == 0): ?>
+							<i class="fas fa-exclamation-triangle animated zoomIn infinite text-danger mt-2 float-left" data-toggle="tooltip" data-placement="right" title="المرجو تفعيل حسابكم"></i>
+							<?php endif; ?>
+            </h5>
+          </div>
+          <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordion">
+            <div class="card-body bg-<?php echo $color2; ?> text-<?php echo $color1; ?>">
+							<i class="fas fa-user-circle fa-3x mb-2"></i>
+              <h3 class="h3">إعدادات الحساب</h3>
+              <hr class="bg-<?php echo $color1; ?>">
+              <form id="account">
+								<div class="form-row justify-content-center">
+                  <div class="col-sm-6 col-md-4">
+										<?php if ($log_row['activated'] == 0): ?>
+										<button class="btn btn-block btn-<?php echo $color1?> rounded-0">تفعيل الحساب<i class='fas fa-envelope mr-2'></i></button>
+										<?php else: ?>
+										<button class="btn btn-block btn-success rounded-0 disabled" readonly="readonly">حسابكم مفعل<i class='fas fa-check mr-2'></i></button>
+										<?php endif; ?>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <button type="button" class="btn btn-block btn-<?php echo $color1?> rounded-0" data-toggle="modal" data-target="#PasswordUpdate">تحديث الرمز السري<i class='fas fa-lock mr-2'></i></button>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <button class="btn btn-block btn-danger rounded-0">إلغاء الحساب<i class='fas fa-times-circle mr-2'></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+			</div>
     </div>
+  </div>
+</div>
+<div class="modal fade bd-example-modal-lg mt-5" tabindex="-1" role="dialog" aria-labelledby="ImageModal" id="ImageModal" aria-hidden="true">
+  <div class="modal-dialog w-75 mx-auto" style="max-width: 100vw">
+    <div class="modal-content w-100">
+			<img class="img-fluid" src="" alt="theme">
+    </div>
+  </div>
+</div>
+<div class="modal fade mt-5" tabindex="-1" role="dialog" aria-labelledby="PasswordUpdate" id="PasswordUpdate" aria-hidden="true">
+  <div class="modal-dialog">
+		<div class="modal-content bg-<?php echo $color2?> text-<?php echo $color1?> text-center rounded-0">
+			<div class="modal-header p-0">
+				<h3 class="modal-title p-3">تحديث الرمز السري</h3>
+				<button type="button" class="btn btn-sm btn-danger rounded-0" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true"><i class="fa fa-times"></i></span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form class="" action="" method="post" autocomplete="off" novalidate>
+					<fieldset class="form-group">
+						<label for="current">الرمز السري الحالي</label>
+						<input type="password" maxlength="25" class="form-control text-<?php echo $color1 ?> border-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="current">
+					</fieldset>
+					<fieldset class="form-group">
+						<label for="password">الرمز السري الجديد</label>
+						<input type="password" maxlength="25" class="form-control text-<?php echo $color1 ?> border-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="password">
+					</fieldset>
+					<fieldset class="form-group">
+						<label for="c_password">تأكيد الرمز السري</label>
+						<input type="password" maxlength="25" class="form-control text-<?php echo $color1 ?> border-<?php echo $color1 ?> text-center font-weight-bold bg-transparent rounded-0" id="c_password">
+					</fieldset>
+				</form>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button type="button" class="btn btn-block btn-outline-<?php echo $color1 ?> rounded-0">حفظ<i class="fas fa-save mr-2"></i></button>
+			</div>
+		</div>
   </div>
 </div>
 <script type="text/javascript">
@@ -1545,7 +1742,7 @@
 		}
     function alertShow(msg) {
       $btn.html('هناك خطأ<i class="fas fa-exclamation-triangle fa-fw mr-2 animated zoomIn infinite"></i>').parents("form").find("div.alert").removeClass("fadeOut d-none").addClass("fadeIn").text(msg);
-      setTimeout(function(){alertHide()},5000);
+      setTimeout(function(){alertHide()},3000);
     }
     function alertHide() {
       $btn.html('حفظ<i class="fas fa-save fa-fw mr-2"></i>').parents("form").find("div.alert").removeClass("fadeIn").addClass("fadeOut");
@@ -1780,6 +1977,19 @@
 			};
 			updateData("emploi");
 		});
-  });
+		$("form#theme").on("click", "button", function(){
+			$btn = $(this);
+      dataset = {
+				color1 : $btn.data("color1"),
+				color2 : $btn.data("color2")
+			};
+			updateData("theme");
+		});
+		$("form#theme").on("click", "img", function(){
+			var src = $(this).attr("src");
+			$("#ImageModal").find("img").attr("src",src);
+			$("#ImageModal").modal("show");
+		});
+	});
 </script>
 <?php include 'assets/footer.php'; ?>
